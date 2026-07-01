@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Resultado{% endblock %}
+
+{% block content %}
+<h1>Resultado</h1>
+
+<a href="/">← Voltar para o início</a>
+
+<hr>
+
+{% if erro %}
+    <p style="color: red; font-weight: bold;">{{ erro }}</p>
+{% else %}
+    <p>Nenhum resultado disponível.</p>
+{% endif %}
+
+<hr>
+<a href="/">← Voltar para o início</a>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Programa de Estoque{% endblock %}
+
+{% block content %}
+<h1>Programa de Estoque</h1>
+<p>Consulte produtos por código de barras, nome ou filtre por unidade, sessão ou fabricante.</p>
+
+<hr>
+
+<h2>Buscar por código de barras</h2>
+<form action="/buscar_codigo" method="POST">
+    <input type="text" name="codigo_barras" placeholder="Digite o código de barras" required>
+    <button type="submit">Buscar</button>
+</form>
+
+<hr>
+
+<h2>Buscar por nome</h2>
+<form action="/buscar_nome" method="POST">
+    <input type="text" name="nome_produto" placeholder="Digite o nome do produto" required>
+    <button type="submit">Buscar</button>
+</form>
+
+<hr>
+
+<h2>Filtros</h2>
+
+<h3>Por unidade</h3>
+<form action="/filtrar_unidade" method="POST">
+    <select name="unidade" required>
+        <option value="">Selecione uma unidade</option>
+        <option value="Loja Palmeiras">Loja Palmeiras</option>
+        <option value="Loja Cidade">Loja Cidade</option>
+        <option value="Depósito Central">Depósito Central</option>
+        <option value="Depósito Secundário">Depósito Secundário</option>
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+
+<h3>Por sessão</h3>
+<form action="/filtrar_secao" method="POST">
+    <select name="secao_id" required>
+        <option value="">Selecione uma sessão</option>
+        {% for secao in secoes %}
+        <option value="{{ secao.id }}">{{ secao.nome }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+
+<h3>Por fabricante</h3>
+<form action="/filtrar_fabricante" method="POST">
+    <select name="fabricante_id" required>
+        <option value="">Selecione um fabricante</option>
+        {% for fabricante in fabricantes %}
+        <option value="{{ fabricante.id }}">{{ fabricante.nome }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+
+{% endblock %}

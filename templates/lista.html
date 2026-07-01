@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Resultado da busca{% endblock %}
+
+{% block content %}
+<h1>Resultado da busca</h1>
+<p>{{ busca }}</p>
+
+<a href="/">← Voltar para o início</a>
+
+<hr>
+
+{% if produtos %}
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 8px; text-align: left;">Código</th>
+                <th style="padding: 8px; text-align: left;">Nome</th>
+                <th style="padding: 8px; text-align: left;">Fabricante</th>
+                <th style="padding: 8px; text-align: left;">Sessão</th>
+                <th style="padding: 8px; text-align: center;">Palmeiras</th>
+                <th style="padding: 8px; text-align: center;">Cidade</th>
+                <th style="padding: 8px; text-align: center;">Dep. Central</th>
+                <th style="padding: 8px; text-align: center;">Dep. Secundário</th>
+                <th style="padding: 8px; text-align: center;">Total</th>
+                <th style="padding: 8px; text-align: center;">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td style="padding: 8px;">{{ produto.codigo_barras }}</td>
+                <td style="padding: 8px;">{{ produto.nome }}</td>
+                <td style="padding: 8px;">{{ produto.nome_fabricante or '-' }}</td>
+                <td style="padding: 8px;">{{ produto.nome_secao or '-' }}</td>
+                <td style="padding: 8px; text-align: center;">{{ produto.qtd_loja_palmeiras or 0 }}</td>
+                <td style="padding: 8px; text-align: center;">{{ produto.qtd_loja_cidade or 0 }}</td>
+                <td style="padding: 8px; text-align: center;">{{ produto.qtd_deposito_central or 0 }}</td>
+                <td style="padding: 8px; text-align: center;">{{ produto.qtd_deposito_secundario or 0 }}</td>
+                <td style="padding: 8px; text-align: center;"><strong>{{ produto.total_estoque }}</strong></td>
+                <td style="padding: 8px; text-align: center;">
+                    <a href="/detalhes/{{ produto.codigo_barras }}">Ver detalhes</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><strong>Total de produtos encontrados:</strong> {{ produtos|length }}</p>
+{% else %}
+    <p>Nenhum produto encontrado.</p>
+{% endif %}
+
+<hr>
+<a href="/">← Voltar para o início</a>
+
+{% endblock %}
